@@ -1,0 +1,5 @@
+package e
+
+const (
+	PLATFORM_ACTION_PROJECT_RECEIVE = "PROJECT_RECEIVE" //项目接收
+)
