@@ -20,7 +20,7 @@ func init() {
 	logging.Setup() //日志
 	gredis.Setup()  // redis
 	//utils.InitModel()
-
+	log.Println("Ojbk")
 }
 
 func main() {
