@@ -1,0 +1,109 @@
+
+	maps := utils.WhereToMap(nil)
+
+	dlist,_ := models.ApiLists(1,1000,utils.BuildWhere(maps))
+
+	list := make([]map[string]interface{}, len(dlist))
+	for i,v := range dlist {
+		db := make(map[string]interface{})
+		db["id"] = v.Id
+		db["name"] = v.Name
+		db["address"] = v.Address
+		db["quoted_type"] = v.QuotedType
+		db["price"] = v.Price
+		db["describe"] = v.Describe
+		db["end_enroll_time"] = v.EndEnrollTime
+		db["created_at"] = v.CreatedAt
+		db["updated_at"] = v.UpdatedAt
+		db["dispatch_no"] = v.DispatchNo
+		db["wid"] = v.User.Id
+		db["mobile"] = v.User.Mobile
+		db["nickname"] = v.User.Nickname
+		db["status"] = v.Status
+		list[i] = db
+	}
+
+	keys := make([]utils.ExcelKey, 14)
+	keys[0] = utils.ExcelKey{
+		Key:  "id",
+		Name: "Id",
+	}
+	keys[1] = utils.ExcelKey{
+		Key:  "name",
+		Name: "项目名称",
+	}
+	keys[2] = utils.ExcelKey{
+		Key:  "address",
+		Name: "详细地址",
+	}
+	keys[3] = utils.ExcelKey{
+		Key:  "quoted_type",
+		Name: "报价方式",
+	}
+	keys[4] = utils.ExcelKey{
+		Key:  "price",
+		Name: "金额",
+	}
+	keys[5] = utils.ExcelKey{
+		Key:  "describe",
+		Name: "描述",
+	}
+	keys[6] = utils.ExcelKey{
+		Key:  "end_enroll_time",
+		Name: "报名截止时间",
+		//Type:  "Image",
+		//Width: 70,
+	}
+
+	keys[7] = utils.ExcelKey{
+		Key:  "created_at",
+		Name: "创建时间",
+		//Type:  "Image",
+		//Width: 70,
+	}
+	keys[8] = utils.ExcelKey{
+		Key:  "updated_at",
+		Name: "最后更新时间",
+		//Type:  "Image",
+		//Width: 70,
+	}
+	keys[9] = utils.ExcelKey{
+		Key:  "dispatch_no",
+		Name: "订单编号",
+		//Type:  "Image",
+		//Width: 70,
+	}
+	keys[10] = utils.ExcelKey{
+		Key:  "wid",
+		Name: "工人id",
+		//Type:  "Image",
+		//Width: 70,
+	}
+	keys[11] = utils.ExcelKey{
+		Key:  "mobile",
+		Name: "工人手机号",
+		//Type:  "Image",
+		//Width: 70,
+	}
+	keys[12] = utils.ExcelKey{
+		Key:  "nickname",
+		Name: "工人昵称",
+		//Type:  "Image",
+		//Width: 70,
+	}
+	keys[13] = utils.ExcelKey{
+		Key:  "status",
+		Name: "状态",
+		//Type:  "Image",
+		//Width: 70,
+	}
+
+	utilsExcel := new(utils.ExcelUtils)
+	utilsExcel.Title = "导出表格"
+	utilsExcel.Keys = keys
+	utilsExcel.DataBase = list
+	utilsExcel.FilePath = "./excelout"
+	utilsExcel.FileName = "mdzz"
+	if err := utilsExcel.Export(); err != nil {
+		log.Println("导出失败", err.Error())
+	}
