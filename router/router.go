@@ -19,6 +19,7 @@ func InitRouter() *gin.Engine {
 	//注册AuthRouter
 	setAuthRouter(r)
 	apiv1 := r.Group("/api/v1")
+	apiv1.POST("/uploader", v1.Uploader)
 	apiv1.Use(jwt.JWT())
 	{
 		apiv1.POST("/get_user_info", v1.GetUserInfo) //获取项目列表
