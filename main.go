@@ -21,6 +21,7 @@ func init() {
 	gredis.Setup()  // redis
 	//utils.InitModel()
 	log.Println("Ojbk")
+
 }
 
 func main() {
