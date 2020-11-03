@@ -17,7 +17,9 @@ func setAuthRouter(r *gin.Engine) {
 	r.POST("/wechat_auth/small_bind_user_info_login", auth.SmallBindUserInfoLogin) //小程序快速绑定用户信息
 
 	// Mobile
-	r.POST("/mobile_auth/auto_reg", auth.MobileAutoReg)      //小程序快速绑定用户信息
-	r.POST("/mobile_auth/get_reg_sms", auth.MobileGetRegSMS) //小程序快速绑定用户信息
-
+	r.POST("/mobile_auth/auto_reg", auth.MobileAutoReg)             //小程序快速绑定用户信息
+	r.POST("/mobile_auth/password_login", auth.MobilePasswordLogin) //小程序快速绑定用户信息
+	r.POST("/mobile_auth/get_reg_sms", auth.MobileGetRegSMS)        //小程序快速绑定用户信息
+	r.POST("/mobile_auth/get_rp_sms", auth.MobileGetRPSMS)          //获取修改密码验证码
+	r.POST("/mobile_auth/re_password", auth.MobileRePassword)       //获取修改密码验证码
 }

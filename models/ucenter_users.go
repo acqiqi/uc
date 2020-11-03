@@ -112,7 +112,7 @@ func UsersCheckMobile(mobile string) (*UcenterUsers, error) {
 func GetUserKey() string {
 	k := utils.RandInt64(10000000, 99999999)
 	var user UcenterUsers
-	err := db.Where("m_user_key = ? AND flag =1", k).First(&user).Error
+	err := db.Where("user_key = ? AND flag =1", k).First(&user).Error
 	if err != nil {
 		return strconv.FormatInt(k, 10)
 	}
