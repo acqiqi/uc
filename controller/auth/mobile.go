@@ -108,6 +108,13 @@ func MobilePasswordLogin(c *gin.Context) {
 	//查询用户是否存在
 	user, err := models.UsersCheckMobile(data.Mobile)
 	if err == nil {
+
+		//判断密码
+		if !utils.PasswordValidate(data.Password, user.Password) {
+			e.ApiErr(c, "密码不正确")
+			return
+		}
+
 		//生成Token
 		token, err := utils.GenerateToken(user.Id)
 		if err != nil {
@@ -179,7 +186,7 @@ func MobileRePassword(c *gin.Context) {
 		Mobile     string `json:"mobile"`
 		Code       string `json:"code"`
 		Password   string `json:"password"`
-		RePassword string `json:"re_password"`
+		RePassword string `json:"repassword"`
 	}{}
 	if err := c.BindJSON(&data); err != nil {
 		e.ApiErr(c, err.Error())
