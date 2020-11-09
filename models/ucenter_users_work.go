@@ -1,6 +1,9 @@
 package models
 
-import "uc/lib/utils"
+import (
+	"github.com/jinzhu/gorm"
+	"uc/lib/utils"
+)
 
 type UcenterUsersWork struct {
 	Model
@@ -31,12 +34,29 @@ type UcenterUsersWork struct {
 	IsGongzuo         int        `json:"is_gongzuo"`
 	GongrenType       string     `json:"gongren_type"`
 	Home              string     `json:"home"`
+	Avatar            string     `json:"avatar"`
 }
 
 // 新增work
 func UsersWorkAdd(d *UcenterUsersWork) error {
 	d.Flag = 1
 	if err := db.Create(&d).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func UsersWorkGetSyncList() ([]*UcenterUsersWork, error) {
+	var mb []*UcenterUsersWork
+	err := db.Model(&UcenterUsersWork{}).Order("card_id desc,id desc").Find(&mb).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return mb, nil
+}
+
+func UsersWorkEdit(id int64, data interface{}) error {
+	if err := db.Model(&UcenterUsersWork{}).Where("id = ? AND flag = 1 ", id).Updates(data).Error; err != nil {
 		return err
 	}
 	return nil

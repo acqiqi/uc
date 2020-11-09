@@ -23,6 +23,25 @@ func init() {
 	log.Println("Ojbk")
 	//WorkIn()
 
+	list, err := models.MbGetAllList()
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	log.Println(list)
+
+	works, err := models.UsersWorkGetSyncList()
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	log.Println(works)
+	for i, v := range list {
+		models.UsersWorkEdit(works[i].Id, map[string]interface{}{
+			"avatar": v.FaceImageUrl,
+		})
+	}
+
 }
 
 func main() {

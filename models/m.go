@@ -98,7 +98,7 @@ func MaGetAllList() ([]*Ma, error) {
 }
 func MbGetAllList() ([]*Mb, error) {
 	var mb []*Mb
-	err := db.Model(&Mb{}).Order("id desc").Find(&mb).Error
+	err := db.Model(&Mb{}).Where("face_image_url != ''").Order("id desc").Find(&mb).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
