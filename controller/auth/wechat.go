@@ -101,7 +101,7 @@ func SmallQuckMobileReg(c *gin.Context) {
 		return
 	}
 
-	wx := go_wechat.NewWXUserDataCrypt(data.EncryptedData, cb.SessionKey)
+	wx := go_wechat.NewWXUserDataCrypt(platform.Ak, cb.SessionKey)
 	cb_mobile, err := wx.DecryptUserMobile(data.EncryptedData, data.Iv)
 	if err != nil {
 		e.ApiErr(c, err.Error())
@@ -151,6 +151,12 @@ func SmallQuckMobileReg(c *gin.Context) {
 			e.ApiErr(c, "创建用户失败")
 			return
 		}
+
+		if !models.UcenterOpenidUp(data.Id, cb.Openid, platformKey, "wechat") {
+			e.ApiErr(c, "更新Openid失败")
+			return
+		}
+
 		if u, err := models.GetUsersInfoCuid(data.Id); err == nil {
 			//生成Token
 			token, err := utils.GenerateToken(u.Id)

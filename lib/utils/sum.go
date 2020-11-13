@@ -124,3 +124,13 @@ func RandInt64(min, max int64) int64 {
 	rand.Seed(time.Now().UnixNano())
 	return rand.Int63n(max-min) + min
 }
+
+// 检测数组是否包含
+func InArray(items []string, item string) bool {
+	for _, eachItem := range items {
+		if eachItem == item {
+			return true
+		}
+	}
+	return false
+}
