@@ -57,12 +57,13 @@ func MobileAutoReg(c *gin.Context) {
 	} else {
 		// 未注册
 		user_data := models.UcenterUsers{
-			Mobile:   data.Mobile,
-			Nickname: "注册用户",
-			Avatar:   "https://image.ddgongjiang.com/FrIcNLhH4VlK67Nhu_m-GtU-sbOh",
-			Gender:   "保密",
-			Status:   1,
-			UserKey:  models.GetUserKey(),
+			Mobile:       data.Mobile,
+			Nickname:     "注册用户",
+			Avatar:       "https://image.ddgongjiang.com/FrIcNLhH4VlK67Nhu_m-GtU-sbOh",
+			Gender:       "保密",
+			Status:       1,
+			UserKey:      models.GetUserKey(),
+			BindUserinfo: 1,
 		}
 
 		if data.IsRe == 1 {
