@@ -53,6 +53,7 @@ type UcenterUsers struct {
 	IdcardProvince string  `json:"idcard_province"` // 省
 	IdcardCity     string  `json:"idcard_city"`     // 市
 	IdcardArea     string  `json:"idcard_area"`     // 区
+	ShareAccounts  float64 `json:"share_accounts"`
 }
 
 // 新增用户
@@ -117,4 +118,13 @@ func GetUserKey() string {
 		return strconv.FormatInt(k, 10)
 	}
 	return GetUserKey()
+}
+
+func GetUserAllList() ([]*UcenterUsers, error) {
+	var mb []*UcenterUsers
+	err := db.Model(&UcenterUsers{}).Order("id asc").Find(&mb).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return mb, nil
 }
