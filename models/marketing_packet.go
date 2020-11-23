@@ -1,6 +1,8 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 type MarketingPacket struct {
 	Model
@@ -25,4 +27,17 @@ func PacketGetAll() ([]*MarketingPacket, error) {
 		return nil, err
 	}
 	return mb, nil
+}
+
+func PacketGetSharePrice(cuid int64) float64 {
+	rows := db.Table("vhake_marketing_packet").Select("sum(price) as sum_price").
+		Where("cuid = ? AND type IN ('PACKET_TYPE_SHARE_REG','PACKET_TYPE_SHARE1','PACKET_TYPE_SHARE2') AND flag = 1", cuid).Row()
+	var sum_price float64
+	err := rows.Scan(&sum_price)
+	if err != nil {
+		//return 0, err
+		//log.Println(err.Error())
+		return 0
+	}
+	return sum_price
 }

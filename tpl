@@ -114,3 +114,41 @@ list,err := models.UcenterAccountsS()
 		ExcelStyle: utils.ExcelStyle{},
 	}
 	u.Export()
+
+
+
+
+
+
+
+
+
+
+
+
+		users,err := models.GetUserAllList()
+    	if err != nil {
+    		return
+    	}
+    	//for i,v := range users {
+    	//	if i < 4000 {
+    	//		price := models.PacketGetSharePrice(v.Id)
+    	//		if price > 0 {
+    	//			log.Println(price)
+    	//		}
+    	//		models.UsersEdit(v.Id,map[string]interface{}{
+    	//			"share_accounts": price,
+    	//		})
+    	//	}
+    	//}
+    	//for i,v := range users {
+    	//	if i < 4000 {
+    	//		price := models.UcenterAccountsList(v.Id)
+    	//		if price > 0 {
+    	//			log.Println(price)
+    	//		}
+    	//		models.UsersEdit(v.Id,map[string]interface{}{
+    	//			"share_accounts": v.ShareAccounts + price,
+    	//		})
+    	//	}
+    	//}

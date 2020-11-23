@@ -54,6 +54,8 @@ type UcenterUsers struct {
 	IdcardCity     string  `json:"idcard_city"`     // 市
 	IdcardArea     string  `json:"idcard_area"`     // 区
 	ShareAccounts  float64 `json:"share_accounts"`
+
+	TplShareAccounts float64 `json:"tpl_share_accounts"`
 }
 
 // 新增用户

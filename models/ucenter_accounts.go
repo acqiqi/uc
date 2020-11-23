@@ -28,7 +28,7 @@ type UcenterAccounts struct {
 
 func UcenterAccountsList(cuid int64) float64 {
 	rows := db.Table("vhake_ucenter_accounts").Select("sum(price) as sum_price").
-		Where("cuid = ? AND type = 1 AND level IN (1,2) AND flag = 1", cuid).Row()
+		Where("cuid = ? AND type = 1 AND content LIKE '%分享收益%' AND flag = 1", cuid).Row()
 	var sum_price float64
 	err := rows.Scan(&sum_price)
 	if err != nil {

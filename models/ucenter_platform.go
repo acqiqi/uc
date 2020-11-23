@@ -6,7 +6,7 @@ type UcenterPlatform struct {
 	PlatformUsername   string `json:"platform_username"` // 平台账号
 	PlatformPassword   string `json:"platform_password"` // 平台密码
 	PlatformAppType    int    `json:"platform_app_type"` // 平台类型 0 api 1 web 5 wechat 6 alipay
-	PlatformKey        string `json:"platform_key"`      // 平台key 完全标识
+	PlatformKey        string `json:"platform_key"`      // 平台key 完全标识吧
 	Status             int    `json:"status"`            // 状态 1运行 0暂停维护 -1禁用
 	Ak                 string `json:"ak"`
 	Sk                 string `json:"sk"`
