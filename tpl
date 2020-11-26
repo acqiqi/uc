@@ -152,3 +152,42 @@ list,err := models.UcenterAccountsS()
     	//		})
     	//	}
     	//}
+
+
+
+
+
+
+
+
+
+    		list,err := models.QuotationTplLinkAllList()
+        	if err != nil {
+        		log.Println(err.Error())
+        		return
+        	}
+        	log.Println(list)
+        	for _,v := range list {
+        		tpl_arr := []Link{}
+        		err := utils.JsonDecode(v.TableJson,&tpl_arr)
+        		if err != nil {
+        			continue
+        		}
+        		for _,value := range tpl_arr {
+        			_,err := models.SmQuotationKeyGetInfo(value.Content,value.Describe)
+        			if err != nil {
+        				//新增数据
+        				m := new(models.SmQuotationKey)
+        				m.CatId = v.CatId
+        				m.Zl = e.ToFloat64(value.Zl)
+        				m.Fl = e.ToFloat64(value.Fl)
+        				m.Work = e.ToFloat64(value.Work)
+        				m.Content = value.Content
+        				m.Describe = value.Describe
+        				m.Unit = value.Unit
+        				m.Flag = 1
+        				models.SmQuotationKeyAdd(m)
+        				log.Println(utils.JsonEncode(m))
+        			}
+        		}
+        	}

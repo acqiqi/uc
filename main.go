@@ -12,6 +12,18 @@ import (
 	"uc/router"
 )
 
+type Link struct {
+	Content   string `json:"content"`
+	Unit      string `json:"unit"`
+	Zl        string `json:"zl"`
+	Fl        string `json:"fl"`
+	Num       int    `json:"num"`
+	Work      string `json:"work"`
+	UnitTotal string `json:"unit_total"`
+	Total     int    `json:"total"`
+	Describe  string `json:"describe"`
+}
+
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags) //设置全局log 打印带行数
 	log.Println("Init Project")
