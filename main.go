@@ -33,20 +33,20 @@ func init() {
 	gredis.Setup()  // redis
 	//utils.InitModel()
 	//WorkIn()
-	list, err := models.OrdersLogGetGaiList()
-	if err != nil {
-		log.Println("made zhizhang")
-	}
-	for _, v := range list {
-		//查询订单是否存在
-		order, err := models.SmUsersServiceGetInfoByOrderId(v.OrderId)
-		if err == nil {
-			log.Println(order.Id)
-			models.OrdersLogEdit(v.Id, map[string]interface{}{
-				"project_id": order.Id,
-			})
-		}
-	}
+	//list, err := models.OrdersLogGetGaiList()
+	//if err != nil {
+	//	log.Println("made zhizhang")
+	//}
+	//for _, v := range list {
+	//	//查询订单是否存在
+	//	order, err := models.SmUsersServiceGetInfoByOrderId(v.OrderId)
+	//	if err == nil {
+	//		log.Println(order.Id)
+	//		models.OrdersLogEdit(v.Id, map[string]interface{}{
+	//			"project_id": order.Id,
+	//		})
+	//	}
+	//}
 
 	//log.Println(list)
 }
