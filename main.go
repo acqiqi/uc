@@ -33,7 +33,7 @@ func init() {
 	gredis.Setup()  // redis
 	//utils.InitModel()
 	//WorkIn()
-
+	//models.GetUserAllList()
 	//log.Println(list)
 }
 
