@@ -51,3 +51,11 @@ func DispatchGetLists(pageNum int, pageSize int, maps interface{}) ([]*Dispatch,
 	}
 	return d, nil
 }
+func DispatchGetInfo(id int64) (*Dispatch, error) {
+	var platform Dispatch
+	err := db.Where("id = ? AND flag =1", id).First(&platform).Error
+	if err != nil {
+		return &Dispatch{}, err
+	}
+	return &platform, nil
+}
